@@ -1,5 +1,5 @@
 class Place:
-    def __init__(self,desc,a_msg="",a_game_ends=False):
+    def __init__(self, desc, a_msg="", a_game_ends=False):
         self.description = desc
         self.destinations = dict()
         self.arrive_message = a_msg
@@ -24,6 +24,7 @@ class Place:
     def get_game_end(self):
         return self.arrive_game_ends
 
+
 class Player():
     def __init__(self, place):
         self.location = place
@@ -31,6 +32,7 @@ class Player():
     def move(self, direction):
         print(self.location.path(direction).description)
         self.location = self.location.path(direction)
+
 
 def report(location):
     print("You can go: " + ",".join(location.get_directions()))
@@ -100,12 +102,12 @@ if __name__ == '__main__':
         )
 
     # connect all the destinations
-    valley.add_destination("forward",path)
-    path.add_destination("right",cliff)
-    path.add_destination("left",cliff)
-    path.add_destination("forward",fork)
-    fork.add_destination("left",maze_0)
-    fork.add_destination("right",mountaintop)
+    valley.add_destination("forward", path)
+    path.add_destination("right", cliff)
+    path.add_destination("left", cliff)
+    path.add_destination("forward", fork)
+    fork.add_destination("left", maze_0)
+    fork.add_destination("right", mountaintop)
     maze_0.add_destination("left", maze_1)
     maze_0.add_destination("right", maze_3)
     maze_1.add_destination("left", maze_0)
