@@ -32,9 +32,11 @@ class Player():
     def move(self, direction):
         self.location = self.location.get_place(direction)
 
+
 def report(location):
     print(location.description)
     print("You can go: " + ", ".join(location.get_directions()))
+
 
 def main():
     player = Player(valley)
@@ -55,7 +57,7 @@ def main():
         if player.location.arrive() is True:
             break
 
-    rest_input = input("Would you like to play again? \nY/N")
+    rest_input = input("\nWould you like to play again? \nY/N: ")
     if(rest_input.lower() == "y"):
         main()
     else:
