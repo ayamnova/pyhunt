@@ -84,7 +84,7 @@ class Player():
 
     def move(self, direction):
         #print(self.location.path(direction).description)
-        self.location = self.location.path(direction)
+        self.location = self.location.get_place(direction)
 '''
         if(x == valley):
             print("Directions:", dir_arr[2])
