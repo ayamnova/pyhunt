@@ -19,7 +19,6 @@ class Place:
 
     def arrive(self):
         print(self.arrive_message)
-        return(self.arrive_game_ends)
 
     def get_game_end(self):
         return self.arrive_game_ends
@@ -51,10 +50,10 @@ def main():
 
         # Move
         player.move(inp)
+        player.location.arrive()
 
         # Check if the game ends
-
-        if player.location.arrive() is True:
+        if player.location.get_game_end() is True:
             break
 
     rest_input = input("\nWould you like to play again? \nY/N: ")
