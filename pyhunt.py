@@ -13,6 +13,9 @@ class Place:
             return(self.destinations[direction])
         else:
             return(None)
+    
+    def get_directions(self):
+        return (list(self.destinations.keys()))
 
     def arrive(self):
         print(self.arrive_message)
@@ -75,76 +78,102 @@ maze_3.add_destination("right", maze_3)
 
 dir_arr = ["left","right","forward"]
 
+class Player():
+    def __init__(self, place):
+        self.location = place
+
+    def move(self, direction):
+        print(self.location.path(direction).description)
+        self.location = self.location.path(direction)
+'''
+        if(x == valley):
+            print("Directions:", dir_arr[2])
+            dir_input = input("What direction? ")
+            if(dir_input) == "forward":
+                report(path)
+            else:
+                print("Not a possible direction")
+        elif(x == path):
+            print("Directions:", dir_arr)
+            dir_input = input("What direction? ")
+            if(dir_input) == "left":
+                report(cliff)
+            elif(dir_input) == "right":
+                report(cliff)
+            elif(dir_input) == "forward":
+                report(fork)
+            else:
+                print("Not a possible direction")
+        elif(x == cliff):
+            Place.get_game_end = True
+        elif(x == fork):
+            print("Directions:",dir_arr[0:2])
+            dir_input = input("What direction? ")
+            if(dir_input) == "left":
+                report(maze_0)
+            elif(dir_input) == "right":
+                report(mountaintop)
+            else:
+                print("Not a possible direction")
+        elif(x == maze_0):
+            print("Directions:",dir_arr[0:2])
+            dir_input = input("What direction? ")
+            if(dir_input) == "left":
+                report(maze_1)
+            else:
+                report(maze_3)
+        elif(x == maze_1):
+            print("Directions:",dir_arr[0:2])
+            dir_input = input("What direction? ")
+            if(dir_input) == "left":
+                report(maze_0)
+            else:
+                report(maze_2)
+        elif(x == maze_2):
+            print("Directions:",dir_arr[0:2])
+            dir_input = input("What direction? ")
+            if(dir_input) == "left":
+                report(fork)
+            else:
+                report(maze_0)
+                '''
 def player():
     report(valley)
 
 def report(location):
     print(location.description)
-    if(location.arrive_message != ""):
-        print(location.arrive_message)
-    move(location)
-    report
+    print("You can go: " + ",".join(location.get_directions()))
 
-def move(x):
-    if(x == valley):
-        print("Directions:", dir_arr[2])
-        dir_input = input("What direction? ")
-        if(dir_input) == "forward":
-            report(path)
-        else:
-            print("Not a possible direction")
-    elif(x == path):
-        print("Directions:", dir_arr)
-        dir_input = input("What direction? ")
-        if(dir_input) == "left":
-            report(cliff)
-        elif(dir_input) == "right":
-            report(cliff)
-        elif(dir_input) == "forward":
-            report(fork)
-        else:
-            print("Not a possible direction")
-    elif(x == cliff):
-        Place.get_game_end = True
-    elif(x == fork):
-        print("Directions:",dir_arr[0:2])
-        dir_input = input("What direction? ")
-        if(dir_input) == "left":
-            report(maze_0)
-        elif(dir_input) == "right":
-            report(mountaintop)
-        else:
-            print("Not a possible direction")
-    elif(x == maze_0):
-        print("Directions:",dir_arr[0:2])
-        dir_input = input("What direction? ")
-        if(dir_input) == "left":
-            report(maze_1)
-        else:
-            report(maze_3)
-    elif(x == maze_1):
-        print("Directions:",dir_arr[0:2])
-        dir_input = input("What direction? ")
-        if(dir_input) == "left":
-            report(maze_0)
-        else:
-            report(maze_2)
-    elif(x == maze_2):
-        print("Directions:",dir_arr[0:2])
-        dir_input = input("What direction? ")
-        if(dir_input) == "left":
-            report(fork)
-        else:
-            report(maze_0)
 
 def main():
+    player = Player(valley)
+    while True:
+        
+        #  Get a valid direciton
+        report(player.location)
+        inp = input("Where would you like to go: ")
+        while inp not in player.location.get_directions():
+            print("That was not a valid direction!")
+            report(player.location)
+            inp = input("Where would you like to go: ")
+
+        # Move
+        player.move(inp)
+
+        # Check if the game ends
+
+        if player.location.arrive() is True:
+            break
+    
+    '''
     while(Place.get_game_end != True):
         player()
         Place.get_game_end = True
     print("Game Over")
+    '''
     rest_input = input("Would you like to play again? \nY/N")
     if(rest_input.lower() == "y"):
-        Place.get_game_end = False
+        #Place.get_game_end = False
         main()
     else:
         print("Thank you for playing!")
