@@ -8,7 +8,7 @@ class Place:
     def add_destination(self, direction, place):
         self.destinations[direction] = place
 
-    def path(self, direction):
+    def get_place(self, direction):
         if direction in self.destinations.keys():
             return(self.destinations[direction])
         else:
@@ -83,7 +83,7 @@ class Player():
         self.location = place
 
     def move(self, direction):
-        print(self.location.path(direction).description)
+        #print(self.location.path(direction).description)
         self.location = self.location.path(direction)
 '''
         if(x == valley):
@@ -142,7 +142,7 @@ def player():
 
 def report(location):
     print(location.description)
-    print("You can go: " + ",".join(location.get_directions()))
+    print("You can go: " + ", ".join(location.get_directions()))
 
 
 def main():
@@ -153,7 +153,7 @@ def main():
         report(player.location)
         inp = input("Where would you like to go: ")
         while inp not in player.location.get_directions():
-            print("That was not a valid direction!")
+            print("That was not a valid direction!\n")
             report(player.location)
             inp = input("Where would you like to go: ")
 
