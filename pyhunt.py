@@ -13,12 +13,15 @@ class Place:
             return(self.destinations[direction])
         else:
             return(None)
-    
+
     def get_directions(self):
         return (list(self.destinations.keys()))
 
     def arrive(self):
-        print(self.arrive_message)
+        # Only print information if something special happens
+        if self.arrive_message != "":
+            print(self.description)
+            print(self.arrive_message)
 
     def get_game_end(self):
         return self.arrive_game_ends
@@ -40,8 +43,8 @@ def report(location):
 def main():
     player = Player(valley)
     while True:
-        #  Get a valid direciton
         report(player.location)
+        #  Get a valid direciton
         inp = input("Where would you like to go: ")
         while inp not in player.location.get_directions():
             print("That was not a valid direction!\n")
